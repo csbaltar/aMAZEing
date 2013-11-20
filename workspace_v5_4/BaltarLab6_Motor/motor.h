@@ -13,6 +13,8 @@ void forward();
 
 void backwards();
 
+void stop();
+
 void bigLeft();
 
 void bigRight();
@@ -20,5 +22,9 @@ void bigRight();
 void smallLeft();
 
 void smallRight();
+
+void initCLK();
+
+void initPins();
 
 #endif /* MOTOR_H_ */
