@@ -1,38 +1,55 @@
 #include <msp430.h> 
 #include "motor.h"
 
+
 /*
  * main.c
  */
 int main(void) {
     WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
 
-       P1DIR |= BIT6|BIT2;			//set pins to output
-       P1SEL |= BIT6|BIT2;           // TA0CCR1 on pin 2 and p
 
-       TACTL &= ~MC1|MC0;            // stop timer A0
+		TACTL &= ~MC1|MC0;            // stop timer A0
+		TA1CTL &= ~MC1|MC0;
 
-       TACTL |= TACLR;                // clear timer A0
+		TACTL |= TACLR;                // clear timer A0
+		TA1CTL |= TACLR;
 
        TACTL |= TASSEL1;           // configure for SMCLK
+       TA1CTL |= TASSEL1;
+
 
        TACCR0 = 100;                // set signal period to 100 clock cycles (~100 microseconds)
-       TACCR1 = 60;
+       TACCR1 = 25;
 
+       TA1CCR0 = 100;                // set signal period to 100 clock cycles (~100 microseconds)
+       TA1CCR1 = 25;
 
-
-       TACCTL1 |= OUTMOD_7;        // set TACCTL1 to Reset / Set mode
+       TA0CCTL1 |= OUTMOD_7;
+       TA1CCTL1 |= OUTMOD_7;        // set TACCTL1 to Reset / Set mode
 
        TACTL |= MC0;                // count up
+       TA1CTL |= MC0;
 
 
        while(1){
-	//	  forward();
+		  forward();
 
-		//  stop();
+		  backwards();
 
-		 // __delay_cycles(1000000);
-		 // backwards();
+		  smallRight();
+
+		  forward();
+
+		  smallLeft();
+
+		  shortforward();
+
+		  bigRight();
+
+		  shortforward();
+
+		  bigLeft();
 }
 	
 	return 0;
