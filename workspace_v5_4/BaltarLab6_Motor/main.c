@@ -9,20 +9,19 @@ int main(void) {
     WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
 
 
-		TACTL &= ~MC1|MC0;            // stop timer A0
-		TA1CTL &= ~MC1|MC0;
+	   TACTL &= ~MC1|MC0;            // stop timer A0
+	   TA1CTL &= ~MC1|MC0;
 
-		TACTL |= TACLR;                // clear timer A0
-		TA1CTL |= TACLR;
+	   TACTL |= TACLR;                // clear timer A0
+	   TA1CTL |= TACLR;
 
        TACTL |= TASSEL1;           // configure for SMCLK
        TA1CTL |= TASSEL1;
 
-
-       TACCR0 = 100;                // set signal period to 100 clock cycles (~100 microseconds)
+       TACCR0 = 50;                // set signal period to 100 clock cycles (~100 microseconds)
        TACCR1 = 25;
 
-       TA1CCR0 = 100;                // set signal period to 100 clock cycles (~100 microseconds)
+       TA1CCR0 = 50;                // set signal period to 100 clock cycles (~100 microseconds)
        TA1CCR1 = 25;
 
        TA0CCTL1 |= OUTMOD_7;
@@ -35,21 +34,35 @@ int main(void) {
        while(1){
 		  forward();
 
+		  stop();
+
 		  backwards();
 
-		  smallRight();
+		  stop();
 
-		  forward();
+		 //forward();
 
 		  smallLeft();
 
-		  shortforward();
+		  stop();
+
+		 // forward();
+
+		  smallRight();
+
+		  stop();
+
+		 // forward();
+
+		  bigLeft();
+
+		  stop();
+
+		 // forward();
 
 		  bigRight();
 
-		  shortforward();
-
-		  bigLeft();
+		  stop();
 }
 	
 	return 0;

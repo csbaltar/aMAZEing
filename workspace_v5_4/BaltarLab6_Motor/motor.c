@@ -20,20 +20,17 @@ void forward()
 	P1SEL &= ~BIT5;
 	P1SEL &= ~BIT1;
 
-	__delay_cycles(1000000);
+	__delay_cycles(1500000);
 }
 
-void shortforward()
+void stop()
 {
-	TACCR1 = 20;
-
-	P1DIR |= BIT2|BIT6;			//set pins to output
-	P1SEL |= BIT2|BIT6;
-
+	P1SEL &= ~BIT6;
+	P1SEL &= ~BIT2;
 	P1SEL &= ~BIT5;
 	P1SEL &= ~BIT1;
 
-	__delay_cycles(500000);
+	__delay_cycles(100000);
 }
 
 void backwards()
@@ -47,7 +44,7 @@ void backwards()
 	P1SEL &= ~BIT6;
 	P1SEL &= ~BIT2;
 
-	__delay_cycles(1500000);
+	__delay_cycles(1000000);
 }
 
 void bigLeft()
@@ -58,7 +55,7 @@ void bigLeft()
 	P1SEL &= ~BIT6;
 	P1SEL &= ~BIT5;
 
-	__delay_cycles(250000);
+	__delay_cycles(400000);
 }
 
 void smallLeft()
@@ -80,7 +77,7 @@ void bigRight()
 	P1SEL &= ~BIT1;
 	P1SEL &= ~BIT2;
 
-	__delay_cycles(250000);
+	__delay_cycles(450000);
 }
 
 void smallRight()

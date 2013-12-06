@@ -11,7 +11,7 @@
 
 void forward();
 
-void shortforward();
+void stop();
 
 void backwards();
 
