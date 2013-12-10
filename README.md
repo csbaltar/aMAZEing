@@ -1,5 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 Lab6_Motor
 ==========
 =======
@@ -17,3 +18,7 @@ void lookLeft();
 void lookRight();
   same as lookLeft() but for the right sensor.  Uses input A7 and P1.6 to light up the LED.  Same distance (1 inch). 
 >>>>>>> 57a0c29827b60bc754a08e0957ffea687c13c76e
+=======
+Lab7_sensor
+===========
+>>>>>>> 320ff42351eeab947421aaa850161e43fbaab097
