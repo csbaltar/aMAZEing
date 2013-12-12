@@ -10,10 +10,4 @@
 
 void move();
 
-void leftAndCenter();
-
-void checkRight();
-
-
-
 #endif /* MAZE_H_ */

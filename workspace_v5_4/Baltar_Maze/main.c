@@ -10,13 +10,9 @@
 int main(void) {
     WDTCTL = WDTPW | WDTHOLD;	// Stop watchdog timer
 
-    //set up motor
+    initMotor();				//set up motor
 
-    initMotor();
-
-    //set up sensors
-
-    initSensors();
+    initSensors();				//set up sensors
 
     while(1)
     {
