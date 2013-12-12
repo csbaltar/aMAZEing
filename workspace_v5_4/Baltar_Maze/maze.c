@@ -9,52 +9,57 @@
 #include "sensor.h"
 #include "motor.h"
 
-void checkLeft()
+void move()
 {
-	if (lookLeft() == 1)
-		{
-			stop();
-			smallRight();
-			stop();
-			forward();
-		}
+	if (lookLeft()==1)
+	{
+		smallRight();
+		forward();
+	}
 
-	else if (lookLeft()==0)
+	else if (lookLeft() == 0 )
+	{
+		smallForward();
+		smallLeft();
+		smallForward();
+	}
+
+	else if ((lookLeft() == 1) & (lookCenter() == 1))
+	{
+		backwards();
+		__delay_cycles(10000);
+		bigRight();
+		forward();
+		forward();
+	}
+
+	else if ((lookLeft() == 0)&(lookCenter()==0))
+	{
+		smallLeft();
+		forward();
+	}
+
+	else if ((lookRight() == 1) & (lookCenter() == 1))
 	{
 		bigLeft();
-		stop();
-		forward();
+		bigLeft();
 	}
-	else
-	{
-		forward();
-	}
-}
 
-void leftAndCenter()
-{
-	if ((lookLeft() == 1) & (lookCenter()==1))
+	else if (lookRight() == 1)
 	{
-		stop();
-		bigRight();
-		stop();
-		forward();
-	}
-	else
-	{
-		forward();
-	}
-}
-
-void checkRight()
-{
-	if ((lookRight()==1))
-	{
-		stop();
 		smallLeft();
-		stop();
 		forward();
 	}
+
+	else if ((lookCenter() == 1))
+	{
+		backwards();
+		__delay_cycles(10000);
+		bigRight();
+		forward();
+		forward();
+	}
+
 	else
 	{
 		forward();

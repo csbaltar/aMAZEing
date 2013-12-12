@@ -8,6 +8,8 @@
 #ifndef SENSOR_H_
 #define SENSOR_H_
 
+void initSensors();
+
 int lookLeft();
 
 int lookRight();

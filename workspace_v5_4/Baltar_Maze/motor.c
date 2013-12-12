@@ -8,7 +8,29 @@
 #include <msp430.h>
 #include "motor.h"
 
+void initMotor()
+{
+	TACTL &= ~MC1|MC0;            // stop timer A0
+	TA1CTL &= ~MC1|MC0;
 
+	TACTL |= TACLR;                // clear timer A0
+	TA1CTL |= TACLR;
+
+	TACTL |= TASSEL1;           // configure for SMCLK
+	TA1CTL |= TASSEL1;
+
+	TACCR0 = 50;                // set signal period to 100 clock cycles (~100 microseconds)
+	TACCR1 = 25;
+
+	TA1CCR0 = 50;                // set signal period to 100 clock cycles (~100 microseconds)
+	TA1CCR1 = 25;
+
+	TA0CCTL1 |= OUTMOD_7;
+	TA1CCTL1 |= OUTMOD_7;        // set TACCTL1 to Reset / Set mode
+
+	TACTL |= MC0;                // count up
+	TA1CTL |= MC0;
+}
 
 void forward()
 {
@@ -20,8 +42,23 @@ void forward()
 	P1SEL &= ~BIT5;
 	P1SEL &= ~BIT1;
 
-	__delay_cycles(1500000);
+	__delay_cycles(10000);
 }
+
+void smallForward()
+{
+	TACCR1 = 20;
+
+	P1DIR &= ~BIT1|BIT5;
+	P1DIR |= BIT2|BIT6;			//set pins to output
+	P1SEL |= BIT2|BIT6;
+
+	P1SEL &= ~BIT5;
+	P1SEL &= ~BIT1;
+
+	__delay_cycles(125);
+}
+
 
 void stop()
 {
@@ -38,13 +75,14 @@ void backwards()
 	TACCR1 = 20;
 	TA1CCR1 = 20;
 
+	P1DIR &= ~BIT2|BIT6;
 	P1DIR |= BIT1|BIT5;			//set pins to output
 	P1SEL |= BIT1|BIT5;
 
 	P1SEL &= ~BIT6;
 	P1SEL &= ~BIT2;
 
-	__delay_cycles(1000000);
+	__delay_cycles(250);
 }
 
 void bigLeft()
@@ -55,7 +93,7 @@ void bigLeft()
 	P1SEL &= ~BIT6;
 	P1SEL &= ~BIT5;
 
-	__delay_cycles(400000);
+	__delay_cycles(50000);
 }
 
 void smallLeft()
@@ -66,7 +104,7 @@ void smallLeft()
 	P1SEL &= ~BIT6;
 	P1SEL &= ~BIT5;
 
-	__delay_cycles(100000);
+	__delay_cycles(9000);
 }
 
 void bigRight()
@@ -88,5 +126,5 @@ void smallRight()
 	P1SEL &= ~BIT1;
 	P1SEL &= ~BIT2;
 
-	__delay_cycles(150000);
+	__delay_cycles(20000);
 }

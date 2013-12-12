@@ -8,7 +8,7 @@
 #ifndef MAZE_H_
 #define MAZE_H_
 
-void checkLeft();
+void move();
 
 void leftAndCenter();
 

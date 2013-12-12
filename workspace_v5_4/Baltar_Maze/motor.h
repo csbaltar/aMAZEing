@@ -9,7 +9,11 @@
 #ifndef MOTOR_H_
 #define MOTOR_H_
 
+void initMotor();
+
 void forward();
+
+void smallForward();
 
 void stop();
 
